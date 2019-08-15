@@ -3,6 +3,12 @@ import './App.css';
 import axios from 'axios';
 import Login from './Login';
 import Signup from './Signup';
+import LandingPage from './LandingPage';
+import Home from './Home';
+import Header from './Header';
+import {
+  BrowserRouter as Router,
+  Route} from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,7 +28,7 @@ class App extends React.Component {
     var token = localStorage.getItem('mernToken');
     if (!token || token === 'undefined') {
       // Token is invalid or missing
-      // todo localStorage keep user login even after close browser
+      
       localStorage.removeItem('mernToken');
       this.setState({
         token: '',
@@ -76,30 +82,39 @@ class App extends React.Component {
 
   render() {
     var user = this.state.user;
-    var contents;
+    var contents = (
+      <Route exact path='/' render={() => (
+        <LandingPage liftToken={this.liftToken} />
+      )}
+      />
+    );
     if (user) {
       //have a user
-      console.log(user);
       contents = (
-        <>
-          <p>Hello, {user.name}</p>
-          <p onClick={this.logout}>Logout</p>
-        </>
-      );
-    } else {
-      //if no user
-      contents = (
-        <>
-          <p>Please login</p>
-          <Login liftToken = {this.liftToken} />
-          <p>or signup</p>
-          <Signup liftToken = {this.liftToken} />
-        </>
-      );
+        <Route exact path='/' render={() => (
+          <>
+          <Header logout={this.logout} user={user}/>
+          <Home liftToken={this.liftToken} user={user}/>
+          </>
+        )}
+        />
+      )
     }
+
     return (
-      contents
-    );
+      <Router>
+        
+
+        {contents}
+        
+        <Route exact path="/login" render={(props) => (
+          <Login {...props} liftToken={this.liftToken}/>
+        )} />
+        <Route exact path="/signup" render={(props) => (
+          <Signup {...props} liftToken={this.liftToken}/>
+        )} />
+      </Router>
+    )
   }
 }
 
