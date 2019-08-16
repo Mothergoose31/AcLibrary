@@ -19,7 +19,9 @@ const userSchema = new mongoose.Schema({
     require: [true, 'You must enter an email'],
     minlength: [5, 'Email must between 5 and 99 characters'],
     maxlength: [99, 'Email must between 5 and 99 characters']
-  }
+  },
+  articles: [{type: mongoose.Schema.Types.ObjectId, ref: 'article'}],
+  citations: [{type: mongoose.Schema.Types.ObjectId, ref: 'citation'}]
 });
 
 userSchema.set('toObject', {

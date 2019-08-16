@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 
 // Route for signup, only send back token to front
 router.post('/signup', (req, res) => {
+  console.log('ready to signup user');
   // see if the email is already in the db\
   User.findOne({email: req.body.email}, (err, user) => {
     if (user)  {

@@ -9,10 +9,10 @@ const LandingPage = props => {
         <>
             <h2>LoginPage</h2>
             <div className = ''>
-                <Router>
+                
                     <Link className="login" to='/login' >Login</Link>
                     <Link className="signup" to='/signup'>Sign Up!</Link>
-                </Router>
+                
             </div>
         </>
     )

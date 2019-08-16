@@ -11,6 +11,7 @@ import {
   Route} from 'react-router-dom';
 
 class App extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +24,7 @@ class App extends React.Component {
     this.liftToken = this.liftToken.bind(this);
     this.logout = this.logout.bind(this);
   }
+  
 
   checkForLocalToken() {
     var token = localStorage.getItem('mernToken');
