@@ -11,15 +11,16 @@ const Header = props => {
     
     if (user) {
         var userLogin = (
-            <nav>
+            <nav className= 'nav'>
                 
                     <Link to='/' onClick={props.logout}>Logout</Link>
+                    
                 
             </nav>
         )
     } else {
         var userLogin = (
-            <nav>
+            <nav className='nav'>
                 
                     <Link to='/login' >Login</Link>
                     <Link to='/signup'>Sign Up</Link>

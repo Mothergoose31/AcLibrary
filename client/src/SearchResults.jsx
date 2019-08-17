@@ -5,7 +5,7 @@ function SearchResults({articles}) {
     content = articles && articles.map((article,id)=>{
         return (
             <div className='list'>
-                <p>{article._source.id}</p>
+                <p id='hiden'>{article._source.id}</p>
             <p key={id}>{article._source.authors[0]}</p>
             <p>{article._source.authors[1]}</p>
             <p>{article._source.datePublished}</p>
