@@ -54,7 +54,6 @@ app.get('/users/:id', (req,res) => {
     if (err) res.json(err)
     res.json(user)
   });
-  
 })
 
 //make a new user
@@ -80,7 +79,104 @@ app.post('/users/:id/articles', (req,res) => {
       res.json(article)
   })
 })
+//get articles of a user
+app.get('/users/:id/articles',(req,res)=>{
+  User.findById(req.params.id).then((article)=>{
+    Article.find({},function(err,articles){
+      if (err){
+        res.json(err)
+      }
+      res.json(articles)
+    })
+  })
+})
 
+//get a specific article from a specific user
+app.get('/users/:id/articles/:id',(req,res)=>{
+  User.findById(req.params.id).then((article)=>{
+    Article.findById(req.params.id,function(err,articles){
+      if (err){
+        res.json(err)
+      }
+      res.json(articles)
+    })
+  })
+})
+
+
+
+
+//get all articles
+app.get('/articles', (req,res) => {
+  Article.find({}, function(err,meals){
+      if (err) {
+      res.json(err)
+      }
+      res.json(meals)
+  })
+})
+
+//get a single article
+app.get('/articles/:id', (req,res) => {
+  Article.findById(req.params.id, function (err, user) {
+    if (err) res.json(err)
+    res.json(user)
+  });
+})
+
+
+
+//delete a article
+app.delete("/users/:id/articles/:id", (req,res) => {
+  User.findById(req.params.uid, (err, user) => {
+    Article.deleteOne({_id: req.params.id}, err => {
+      if (err) res.json(err)
+      res.json(1);
+    })
+  })
+})
+
+
+
+
+//view all citations
+app.get('/users/:id/citations',(req,res)=>{
+  User.findById(req.params.id).then((citation)=>{
+    Citation.find({},function(err,citation){
+      if (err){
+        res.json(err)
+      }
+      res.json(citation)
+    })
+  })
+})
+
+// view a sinlge citation
+app.get('/users/:id/citations/:id',(req,res)=>{
+  User.findById(req.params.id).then((citation)=>{
+    Citation.findById(req.params.id,function(err,citation){
+      if (err){
+        res.json(err)
+      }
+      res.json(citation)
+    })
+  })
+})
+
+//make a citation
+app.post('/users/:id/citations', (req,res) => {
+  Citation.create({
+    citation:req.body.citation
+  }).then((citation)=>{
+    res.json(citation)
+  });
+})
+
+
+
+
+
+//delete a citation
 
 
 app.use('/auth', require('./routes/auth'));
