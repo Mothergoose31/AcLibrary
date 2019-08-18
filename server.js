@@ -7,10 +7,7 @@ const RateLimit = require('express-rate-limit');
 const User = require('./models/user');
 const Article = require('./models/articles');
 const Citation = require('./models/citations');
-
-
 const app = express();
-
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -28,8 +25,6 @@ const signupLimiter = new RateLimit({
   delayMs: 0,
   message: "Maximum accounts created. Please try again later."
 })
-
-
 
 mongoose.connect('mongodb://localhost/acLibrary', {useNewUrlParser: true});
 const db = mongoose.connection;
@@ -103,9 +98,6 @@ app.get('/users/:id/articles/:id',(req,res)=>{
   })
 })
 
-
-
-
 //get all articles
 app.get('/articles', (req,res) => {
   Article.find({}, function(err,meals){
@@ -124,8 +116,6 @@ app.get('/articles/:id', (req,res) => {
   });
 })
 
-
-
 //delete a article
 app.delete("/users/:id/articles/:id", (req,res) => {
   User.findById(req.params.uid, (err, user) => {
@@ -135,9 +125,6 @@ app.delete("/users/:id/articles/:id", (req,res) => {
     })
   })
 })
-
-
-
 
 //view all citations
 app.get('/users/:id/citations',(req,res)=>{
@@ -172,12 +159,7 @@ app.post('/users/:id/citations', (req,res) => {
   });
 })
 
-
-
-
-
 //delete a citation
-
 
 app.use('/auth', require('./routes/auth'));
 app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api'));

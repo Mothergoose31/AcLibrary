@@ -6,6 +6,7 @@ import Signup from './Signup';
 import LandingPage from './LandingPage';
 import Home from './Home';
 import Header from './Header';
+import FavoritesCitationsContainer from './FavoritesCitationsContainer';
 import {
   BrowserRouter as Router,
   Route} from 'react-router-dom';
@@ -115,6 +116,13 @@ class App extends React.Component {
         <Route exact path="/signup" render={(props) => (
           <Signup {...props} liftToken={this.liftToken}/>
         )} />
+        <Route exact path='/favorites' render={(props) => (
+                <>
+                <Header logout={this.logout} user={user}/>
+                <FavoritesCitationsContainer {...props} user={this.state.user}/>
+                </>
+        )} />
+      
       </Router>
     )
   }
