@@ -45,13 +45,11 @@ const Home = props => {
     //     })
     // }
 
-const addToFavorites = (pdfUrl,id,note,tags,user) => {
-    
-    console.log()
-    
+const addToFavorites = (id , pdfUrl) => {
     
     axios.post(`/users/5d5c33f1ba2d801a536e24a4/articles`, {id:id,pdfUrl:pdfUrl}).then((response) => {
         axios.get(`/users/5d5c33f1ba2d801a536e24a4/articles`).then(response =>{
+            console.log(response.data);
             createSetFavorite(response.data)
         })
     },[])
@@ -66,8 +64,6 @@ const addToFavorites = (pdfUrl,id,note,tags,user) => {
     return(
         <div className = 'HomeContainer'>
             <h3>hello{name}</h3>
-            <h4>your id is </h4>
-            <h2>Home Page</h2>
             
             <div className='inputAndButton'>
                 <input type="text" placeholder='search for articles'  onChange={(e)=>setTitle(e.target.value)} value={title}/>

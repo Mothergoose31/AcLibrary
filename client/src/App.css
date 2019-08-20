@@ -18,12 +18,23 @@ h2{
   text-align: center;
 
 }
+.input{
+  width:500px;
+  height: 25px;
+
+}
 .mainContainer{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
+  font-family: 'Libre Baskerville', serif;
   
 }
+.citationsContainer{
+  background-color: rgba(108, 122, 137, .5);
+  padding: 15px;  
+}
+
 .favoritesContainer{
   background-color: rgba(108, 122, 137, .5);
 flex: left;

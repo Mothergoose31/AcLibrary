@@ -10,6 +10,7 @@ const Header = props => {
     if (user) {
         var userLogin = (
             <nav className= 'nav'>
+                <Link to="/">&larr; Back Home</Link>
                 <Link to='/' onClick={props.logout}>Logout</Link>
                 <Link to='/favorites'>Favorites</Link>  
             </nav>

@@ -13,13 +13,13 @@ function SearchResults({articles,addToFavorites}) {
             <p>{article._source.description}</p>
             <a href={article._source.fullTextIdentifier}>{article._source.fullTextIdentifier}</a>
                 
-            <button  type="submit" className='button' onClick={()=>addToFavorites( article.id, article._source.fullTextIdentifier)}>Add to Favorites</button>
+            <button  type="submit" className='button' onClick={()=>addToFavorites( article._source.id, article._source.fullTextIdentifier)}>Add to Favorites</button>
             <br/>
             </div>
 
         )
     })
-    // ()=>addToFavorites(article._source.id, article._source.pdfUrl)
+    
     return (
         <div className="App">
             

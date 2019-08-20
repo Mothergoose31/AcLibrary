@@ -79,13 +79,14 @@ app.post('/users/:id/articles', (req, res) => {
       })
   })
 })
-
+// view all articles of a user
 app.get('/users/:id/articles', (req, res) => {
   User.findById(req.params.id).populate('articles').exec((err, user) => {
       if (err) res.json(err)
       res.json(user)
   })
 })
+
 //get a specific article from a specific user
 app.get('/users/:uId/articles/:aId',(req,res)=>{
   
@@ -97,26 +98,7 @@ app.get('/users/:uId/articles/:aId',(req,res)=>{
     })
   
 })
-
-//get all articles
-app.get('/articles', (req,res) => {
-  Article.find({}, function(err,articles){
-      if (err) {
-      res.json(err)
-      }
-      res.json(articles)
-  })
-})
-
-//get a single article
-app.get('/articles/:id', (req,res) => {
-  Article.findById(req.params.id, function (err, user) {
-    if (err) res.json(err)
-    res.json(user)
-  });
-})
-
-//delete a article
+//delete a specific article
 app.delete("/users/:uId/articles/:aId", (req,res) => {
   User.findById(req.params.uId, (err, user) => {
     Article.deleteOne({_id: req.params.aId}, err => {
@@ -126,19 +108,53 @@ app.delete("/users/:uId/articles/:aId", (req,res) => {
   })
 })
 
-//view all citations
+
+// //get all articles
+// app.get('/articles', (req,res) => {
+//   Article.find({}, function(err,articles){
+//       if (err) {
+//       res.json(err)
+//       }
+//       res.json(articles)
+//   })
+// })
+
+// //get a single article
+// app.get('/articles/:id', (req,res) => {
+//   Article.findById(req.params.id, function (err, user) {
+//     if (err) res.json(err)
+//     res.json(user)
+//   });
+// })
+
+
+
+
+//make a citation
+app.post('/users/:id/citations', (req, res) => {
+  User.findById(req.params.id, function (err, user) {
+    console.log("We got the user")
+    Citation.create({
+      citation: req.body.citation
+    
+    },function (err, citation) {
+        user.citations.push(citation)
+        user.save(function (err, user) {
+          if (err) console.log(err)
+          res.json(user)
+        })
+      })
+  })
+})
+  
+  //view all citations of a user
 app.get('/users/:id/citations',(req,res)=>{
-  User.findById(req.params.id).then((citation)=>{
-    Citation.find({},function(err,citation){
-      if (err){
-        res.json(err)
-      }
-      res.json(citation)
-    })
+  User.findById(req.params.id).populate('citations').exec((err, user) => {
+    if (err) res.json(err)
+    res.json(user)
   })
 })
 
-// view a sinlge citation
 app.get('/users/:id/citations/:id',(req,res)=>{
   User.findById(req.params.id).then((citation)=>{
     Citation.findById(req.params.id,function(err,citation){
@@ -150,19 +166,31 @@ app.get('/users/:id/citations/:id',(req,res)=>{
   })
 })
 
-//make a citation
-app.post('/users/:id/citations', (req,res) => {
-  Citation.create({
-    citation:req.body.citation
-  }).then((citation)=>{
-    res.json(citation)
-  });
+//Update a  citation
+app.post("/users/:uId/citations/:cId", (req,res) => {
+  User.findById(req.params.uId, (err, user) => {
+    Citation.findByIdAndUpdate({citation: req.params.citation}, err => {
+      if (err) res.json(err)
+      res.json(1);
+    })
+  })
 })
 
-//delete a citation
 
-app.use('/auth', require('./routes/auth'));
-app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api'));
+
+
+  //delete a citation
+  app.delete("/users/:uId/citations/:cId", (req,res) => {
+    User.findById(req.params.uId, (err, user) => {
+      Article.deleteOne({_id: req.params.cId}, err => {
+        if (err) res.json(err)
+        res.json(1);
+      })
+    })
+  })
+  
+  app.use('/auth', require('./routes/auth'));
+  app.use('/api', expressJWT({secret: process.env.JWT_SECRET}), require('./routes/api'));
 
 app.listen(process.env.PORT, () => {
   console.log('🖲🖲🖲 server connected to port ' + process.env.PORT);

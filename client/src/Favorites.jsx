@@ -9,13 +9,12 @@ function Favorites({favorites, deleteArticle}) {
             return (
             <div>
                 {console.log(article._id)}
-                    <p key={id}>{article.id}</p>
-                    <p>{article.pdfUrl}</p>
-                    <p>{article.note}</p>
-                    <p>{article.tags}</p>
-    
-                    <button  onClick={()=> deleteArticle(article)} className='button' >Remove this article</button>
-                </div>
+                <p key={id}>{article.id}</p>
+                <p>{article.pdfUrl}</p>
+                <p>{article.note}</p>
+                <p>{article.tags}</p>
+                <button  onClick={()=> deleteArticle(article)} className='button' >Remove this article</button>
+            </div>
             )  
         })
     }
@@ -24,7 +23,7 @@ function Favorites({favorites, deleteArticle}) {
     }
     return (
         <div className="ArticleFaves">
-            <p className="detail">Favorite Articles:</p>
+            <h3 className="detail">Favorite Articles</h3>
             {content}
         </div>
     )
