@@ -12,8 +12,8 @@ const FavoritesCitationsContainer = props => {
     const [favorites, setFavorites] = useState([])
     var name = props.user ? props.user.name : '';
     //when clicked  nodemon  breaks
-    const deleteArticle = (favorites,article) => {
-        console.log(props.article._id);
+    const deleteArticle = (article) => {
+        console.log(article);
         axios.delete(`/users/5d5c33f1ba2d801a536e24a4/articles/${article._id}`).then((response) => {
             
             
