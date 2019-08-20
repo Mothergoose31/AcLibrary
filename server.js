@@ -157,21 +157,24 @@ app.get('/users/:id/citations',(req,res)=>{
 
 app.get('/users/:id/citations/:id',(req,res)=>{
   User.findById(req.params.id).then((citation)=>{
-    Citation.findById(req.params.id,function(err,citation){
+    Citation.findById(req.params.id,function(err,user){
       if (err){
         res.json(err)
       }
-      res.json(citation)
+      res.json(user)
     })
   })
 })
 
+
 //Update a  citation
-app.post("/users/:uId/citations/:cId", (req,res) => {
-  User.findById(req.params.uId, (err, user) => {
-    Citation.findByIdAndUpdate({citation: req.params.citation}, err => {
-      if (err) res.json(err)
-      res.json(1);
+app.put("/users/:uId/citations/:cId", (req,res) => {
+  User.findById(req.params.id).then((citation)=>{
+    Citation.findByIdAndUpdate(req.params.cId,{citation:req.body.citation},function(err,user){
+      if (err){
+        res.json(err)
+      }
+      res.json(user)
     })
   })
 })
@@ -182,7 +185,7 @@ app.post("/users/:uId/citations/:cId", (req,res) => {
   //delete a citation
   app.delete("/users/:uId/citations/:cId", (req,res) => {
     User.findById(req.params.uId, (err, user) => {
-      Article.deleteOne({_id: req.params.cId}, err => {
+      Citation.deleteOne({_id: req.params.cId}, err => {
         if (err) res.json(err)
         res.json(1);
       })

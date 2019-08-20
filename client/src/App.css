@@ -8,6 +8,7 @@ h2{
 #hiden{
   display:none;
 }
+
 .App {
   text-align: center;
   font-family: 'Libre Baskerville', serif;
@@ -41,6 +42,8 @@ flex: left;
 
 }
 .nav{
+
+  justify-content: space-between;
   height: 40px;
   font-family: 'Libre Baskerville', serif;
   font-size: 18px;
