@@ -1,19 +1,30 @@
 import React from 'react';
 
-function Favorites({article, favorites, deleteAFavorite}) {
+function Favorites({favorites, deleteArticle}) {
+    console.log(favorites)
     let content;
-    content = favorites.map((favorite,id)=>{
-        return (
-        <div>
-            <p key={id}>{favorite.toUpperCase()}</p>
-            <button onClick={()=> deleteAFavorite(favorite)} className='button'>Remove Favorite</button>
-        </div>
-    )  
-    })
+    if (favorites.articles ){
+
+        content = favorites.articles.map((article,id)=>{
+            return (
+            <div>
+                    <p key={id}>{article}</p>
+                    {/* <p>{article.pdfUrl}</p>
+                    <p>{article.note}</p>
+                    <p>{article.tags}</p> */}
+    
+                    <button onClick={console.log("Clicked!")} onClick={()=> deleteArticle(article.id)} className='button' >Remove this article</button>
+                </div>
+            )  
+        })
+    }
+    else{
+        content = <p> no content</p>
+    }
     return (
         <div className="ArticleFaves">
-            <p className="detail">Favorite Pokemon:</p>
-            <p className="favs"> {content}</p>
+            <p className="detail">Favorite Articles:</p>
+            {content}
         </div>
     )
 }

@@ -37,7 +37,6 @@ db.on('error', (err) => {
 
 //get all users
 app.get('/users', (req,res) => {
-
   User.find({}, function(err,users){
       if (err) res.json(err)
       res.json(users)
@@ -63,48 +62,74 @@ app.post('/users', (req,res) => {
 })
 
 //create a new article
-app.post('/users/:id/articles', (req,res) => {
-  Article.create({
-  id: req.body.id,
-  pdfUrl: req.body.pdfUrl,
-  note: req.body.note,
-  tags: req.body.tags 
-
-  }, function(err, article) {
-      res.json(article)
+app.post('/users/:id/articles', (req, res) => {
+  User.findById(req.params.id, function (err, user) {
+      console.log("We got the user")
+      Article.create({
+        id: req.body.id,
+        pdfUrl: req.body.pdfUrl,
+        note: req.body.note,
+        tags: req.body.tags 
+      }, function (err, article) {
+          user.articles.push(article)
+          user.save(function (err, user) {
+              if (err) console.log(err)
+              res.json(user)
+          })
+      })
   })
 })
+
+
+
+
+// app.post('/users/:id/articles', (req,res) => {
+//   Article.create({
+//   id: req.body.id,
+//   pdfUrl: req.body.pdfUrl,
+//   note: req.body.note,
+//   tags: req.body.tags 
+
+//   }, function(err, article) {
+//       res.json(article)
+//   })
+// })
 //get articles of a user
-app.get('/users/:id/articles',(req,res)=>{
-  User.findById(req.params.id).then((article)=>{
-    Article.find({},function(err,articles){
-      if (err){
-        res.json(err)
-      }
-      res.json(articles)
-    })
+// app.get('/users/:id/articles',(req,res)=>{
+//   User.findById(req.params.id).then(()=>{
+//     Article.find({},function(err,user){
+//       if (err){
+//         res.json(err)
+//       }
+//       res.json(user)
+//     })
+//   })
+// })
+app.get('/users/:id/articles', (req, res) => {
+  User.findById(req.params.id).populate('article').exec((err, user) => {
+      if (err) res.json(err)
+      res.json(user)
   })
 })
-
 //get a specific article from a specific user
-app.get('/users/:id/articles/:id',(req,res)=>{
-  User.findById(req.params.id).then((article)=>{
-    Article.findById(req.params.id,function(err,articles){
+app.get('/users/:uId/articles/:aId',(req,res)=>{
+  
+    Article.findById(req.params.aId,function(err,user){
       if (err){
         res.json(err)
       }
-      res.json(articles)
+      res.json(user)
     })
-  })
+  
 })
 
 //get all articles
 app.get('/articles', (req,res) => {
-  Article.find({}, function(err,meals){
+  Article.find({}, function(err,articles){
       if (err) {
       res.json(err)
       }
-      res.json(meals)
+      res.json(articles)
   })
 })
 
@@ -117,9 +142,9 @@ app.get('/articles/:id', (req,res) => {
 })
 
 //delete a article
-app.delete("/users/:id/articles/:id", (req,res) => {
-  User.findById(req.params.uid, (err, user) => {
-    Article.deleteOne({_id: req.params.id}, err => {
+app.delete("/users/:uId/articles/:aId", (req,res) => {
+  User.findById(req.params.uId, (err, user) => {
+    Article.deleteOne({_id: req.params.aId}, err => {
       if (err) res.json(err)
       res.json(1);
     })

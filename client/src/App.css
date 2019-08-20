@@ -1,8 +1,7 @@
-body{
-  background-image: url('/client/public/img/messy.jpg');
-}
+
 h2{
   font-family: 'Libre Baskerville', serif;
+  
 }
 #hiden{
   display:none;
@@ -12,7 +11,18 @@ h2{
   font-family: 'Libre Baskerville', serif;
 }
 .HomeContainer{
-  background-image: url('/client/public/img/messy.jpg');
+  
+  text-align: center;
+
+}
+.mainContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  
+}
+.favoritesContainer{
+flex: left;
 
 }
 .nav{
