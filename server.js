@@ -80,33 +80,8 @@ app.post('/users/:id/articles', (req, res) => {
   })
 })
 
-
-
-
-// app.post('/users/:id/articles', (req,res) => {
-//   Article.create({
-//   id: req.body.id,
-//   pdfUrl: req.body.pdfUrl,
-//   note: req.body.note,
-//   tags: req.body.tags 
-
-//   }, function(err, article) {
-//       res.json(article)
-//   })
-// })
-//get articles of a user
-// app.get('/users/:id/articles',(req,res)=>{
-//   User.findById(req.params.id).then(()=>{
-//     Article.find({},function(err,user){
-//       if (err){
-//         res.json(err)
-//       }
-//       res.json(user)
-//     })
-//   })
-// })
 app.get('/users/:id/articles', (req, res) => {
-  User.findById(req.params.id).populate('article').exec((err, user) => {
+  User.findById(req.params.id).populate('articles').exec((err, user) => {
       if (err) res.json(err)
       res.json(user)
   })

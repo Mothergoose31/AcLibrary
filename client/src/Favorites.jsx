@@ -8,10 +8,10 @@ function Favorites({favorites, deleteArticle}) {
         content = favorites.articles.map((article,id)=>{
             return (
             <div>
-                    <p key={id}>{article}</p>
-                    {/* <p>{article.pdfUrl}</p>
+                    <p key={id}>{article.id}</p>
+                    <p>{article.pdfUrl}</p>
                     <p>{article.note}</p>
-                    <p>{article.tags}</p> */}
+                    <p>{article.tags}</p>
     
                     <button onClick={console.log("Clicked!")} onClick={()=> deleteArticle(article.id)} className='button' >Remove this article</button>
                 </div>

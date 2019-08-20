@@ -10,11 +10,11 @@ import {
 
 const FavoritesCitationsContainer = props => {
     const [favorites, setFavorites] = useState([])
-
+    var name = props.user ? props.user.name : '';
     //when clicked  nodemon  breaks
-    const deleteArticle = (favorites) => {
+    const deleteArticle = (favorites,article) => {
         console.log(props.article._id);
-        axios.delete(`/users/5d573e62ea5bb30e9fe49fb3/articles/${props.article._id}`).then((response) => {
+        axios.delete(`/users/5d5c33f1ba2d801a536e24a4/articles/${article._id}`).then((response) => {
             
             
             })
@@ -25,7 +25,7 @@ const FavoritesCitationsContainer = props => {
     useEffect(()=>{
         
         console.log(props.user);
-        axios.get(`/users/5d573e62ea5bb30e9fe49fb3/articles`).then((response) =>{
+        axios.get(`/users/5d5c33f1ba2d801a536e24a4/articles`).then((response) =>{
             console.log("hitting the route");
             console.log(response.data);
             setFavorites(response.data);
@@ -39,7 +39,7 @@ const FavoritesCitationsContainer = props => {
             <div className =  'mainContainer'>
 
                 <div className = 'favoritesContainer'>
-                    <Favorites favorites={favorites} deleteArticle={deleteArticle} />
+                    <Favorites favorites={favorites} deleteArticle={deleteArticle}   />
                 </div>
                 <div className = 'citationsContainer'>
 

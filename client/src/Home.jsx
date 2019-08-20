@@ -32,10 +32,26 @@ const Home = props => {
     //     })
     // }
 
+    // function addFavs(player) {
+    //     axios.post(`/users/${user._id}/players`, { 
+    //         firstName: player.first_name,
+    //         lastName: player.last_name,
+    //         playerId: player.id 
+            
+    //     }).then(res => {
+    //         axios.get(`/users/${user._id}/players`).then(res => {
+                
+    //         })
+    //     })
+    // }
 
-const addToFavorites = (pdfUrl,_id) => {
-    axios.post(`/users/5d573e62ea5bb30e9fe49fb3/articles`, {_id,pdfUrl}).then((response) => {
-        axios.get(`/users/5d573e62ea5bb30e9fe49fb3/articles`).then(response =>{
+const addToFavorites = (pdfUrl,id,note,tags,user) => {
+    
+    console.log()
+    
+    
+    axios.post(`/users/5d5c33f1ba2d801a536e24a4/articles`, {id:id,pdfUrl:pdfUrl}).then((response) => {
+        axios.get(`/users/5d5c33f1ba2d801a536e24a4/articles`).then(response =>{
             createSetFavorite(response.data)
         })
     },[])
@@ -50,7 +66,7 @@ const addToFavorites = (pdfUrl,_id) => {
     return(
         <div className = 'HomeContainer'>
             <h3>hello{name}</h3>
-            <h4>your id is {name._id}</h4>
+            <h4>your id is </h4>
             <h2>Home Page</h2>
             
             <div className='inputAndButton'>

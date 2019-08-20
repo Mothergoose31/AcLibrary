@@ -119,7 +119,7 @@ class App extends React.Component {
         <Route exact path='/favorites' render={(props) => (
                 <>
                 <Header logout={this.logout} user={user}/>
-                <FavoritesCitationsContainer {...props} user={this.state.user}/>
+                <FavoritesCitationsContainer {...props} user={user}/>
                 </>
         )} />
       

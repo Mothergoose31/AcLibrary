@@ -1,4 +1,6 @@
-
+body{
+  background-color: #fef1d2;
+}
 h2{
   font-family: 'Libre Baskerville', serif;
   
@@ -9,6 +11,7 @@ h2{
 .App {
   text-align: center;
   font-family: 'Libre Baskerville', serif;
+  background-color: rgba(108, 122, 137, .5)
 }
 .HomeContainer{
   
@@ -22,6 +25,7 @@ h2{
   
 }
 .favoritesContainer{
+  background-color: rgba(108, 122, 137, .5);
 flex: left;
 
 }
