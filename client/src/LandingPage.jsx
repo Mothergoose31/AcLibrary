@@ -8,7 +8,7 @@ const LandingPage = props => {
     return(
         <>
             <h2>LoginPage</h2>
-            <div className = ''>
+            <div className = 'ladingpage'>
                 
                     <Link className="login" to='/login' >Login</Link>
                     <Link className="signup" to='/signup'>Sign Up!</Link>

@@ -19,7 +19,7 @@ function Favorites({favorites, deleteArticle}) {
         })
     }
     else{
-        content = <p> no content</p>
+        content = <p> no content</p>    
     }
     return (
         <div className="ArticleFaves">

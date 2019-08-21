@@ -66,8 +66,9 @@ const addToFavorites = (id , pdfUrl) => {
             <h3>hello{name}</h3>
             
             <div className='inputAndButton'>
-                <input type="text" placeholder='search for articles'  onChange={(e)=>setTitle(e.target.value)} value={title}/>
-                <button onClick={()=>setSearch()}>Search!</button>
+                <input type="text" placeholder='search for articles'  onChange={(e)=>setTitle(e.target.value)} value={title} className='input'></input>
+                <div className='image'></div> 
+                
             </div>
             <div className='searchResults'>
                 <SearchResults articles={articles} addToFavorites={addToFavorites}></SearchResults>

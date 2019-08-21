@@ -10,9 +10,9 @@ const Header = props => {
     if (user) {
         var userLogin = (
             <nav className= 'nav'>
-                <Link to="/">&larr; Back Home</Link>
-                <Link to='/' onClick={props.logout}>Logout</Link>
-                <Link to='/favorites'>Favorites</Link>  
+                <Link to="/" className='navItems'>&larr; Back Home</Link>
+                <Link to='/' onClick={props.logout} className='navItems'>Logout</Link>
+                <Link to='/favorites' className='navItems'>Favorites</Link>  
             </nav>
         )
     } else {

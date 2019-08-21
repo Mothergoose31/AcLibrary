@@ -18,17 +18,21 @@ const FavoritesCitationsContainer = props => {
         axios.delete(`/users/5d5c33f1ba2d801a536e24a4/articles/${article._id}`).then((response) => {
         })
     }
+    const deleteCitation = (citation) => {
+        console.log(citation);
+        axios.delete(`/users/5d5c33f1ba2d801a536e24a4/citations/${citations._id}`).then((response) => {
+        })
+    }
     
 
-    // const addToFavorites = (event) => {
-    //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('mernToken');
-    //     const newFavs = [...favorites, sportsList]
-    //     axios.post(`users/${user._id}/events/`, {name: event.name, date: event.date}).then((response) => {
-    //       axios.get(`users/${user._id}/events`).then((res) => {
-    //         setFavorites(res.data)
-    //       })
-    //     })
-    //   }
+    
+    const updateCitation = (citation) => {
+        axios.put(`/users/5d5c33f1ba2d801a536e24a4/citations/${citation._id}`,{citation}).then((response)=>{
+            axios.get(`/users/5d5c33f1ba2d801a536e24a4/citations`).then((response)=>{
+                setCitations(response.data);
+            })
+        })
+    }
 
     useEffect(()=>{
         axios.get(`/users/5d5c33f1ba2d801a536e24a4/articles`).then((response) =>{
@@ -49,14 +53,14 @@ const FavoritesCitationsContainer = props => {
 
     return(
         <>
-            <h2>Favorites page</h2>
+            <h2>Favorites</h2>
             <div className =  'mainContainer'>
 
                 <div className = 'favoritesContainer'>
                     <Favorites favorites={favorites} deleteArticle={deleteArticle}   />
                 </div>
                 <div className = 'citationsContainer'>
-                    <Citations citations={citations}/>
+                    <Citations citations={citations} deleteCitation={deleteCitation} updateCitation={updateCitation} />
                 </div>
         </div>
         </>

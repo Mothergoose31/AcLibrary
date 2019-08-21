@@ -1,12 +1,50 @@
 body{
-  background-color: #fef1d2;
+  background-image: url('./messy.jpg');
+  background-size: 100% 
+  
+
+  
 }
 h2{
   font-family: 'Libre Baskerville', serif;
   
 }
 #hiden{
-  display:none;
+  display:none; 
+}
+.image{
+  height: 34px;
+  width:35px;
+  background-image: url('./magnifying.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  position:absolute;
+  margin-left: 600px;
+  margin-top: -30px;
+
+}
+.inputAndButton{
+margin: auto;
+width:694px;
+height:40px;
+border-radius: 20px;
+background-color: whitesmoke;
+}
+input{
+  width:530px;
+  height:34px;
+  background-color:whitesmoke;
+}
+.navItems:hover {
+  background-color: lightcoral;
+}
+.navItems{
+  background-color:rgba(100,100,100,.05);
+  font-family: 'Libre Baskerville', serif;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color:white;
 }
 
 .App {
@@ -33,11 +71,13 @@ h2{
 }
 .citationsContainer{
   background-color: rgba(108, 122, 137, .5);
+  color:white;
   padding: 15px;  
 }
 
 .favoritesContainer{
   background-color: rgba(108, 122, 137, .5);
+  color: white ;
 flex: left;
 
 }
